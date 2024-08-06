@@ -82,6 +82,10 @@ func CreateMenu() gin.HandlerFunc {
 	}
 }
 
+func inTimeSpan(start, end, check time.Time) bool {
+	return start.After(time.Now()) && end.After(start)
+}
+
 func UpdateMenu() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
@@ -93,7 +97,7 @@ func UpdateMenu() gin.HandlerFunc {
 		}
 
 		menuId := c.Param("menu_id")
-		filter := bson.M{"manuu_id": menuId}
+		filter := bson.M{"menu_id": menuId}
 
 		var updateObj primitive.D
 
@@ -120,18 +124,18 @@ func UpdateMenu() gin.HandlerFunc {
 
 			upsert := true
 
-			opt := options.UpdateOptions {
+			opt := options.UpdateOptions{
 				Upsert: &upsert,
 			}
 
-			result, err := menuCollection.UpdateOne {
+			result, err := menuCollection.UpdateOne(
 				ctx,
 				filter,
 				bson.D{
-					{"$set", updateObj}
+					{"$set", updateObj},
 				},
 				&opt,
-			}
+			)
 			if err != nil {
 				msg := "Menu update failed"
 				c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
