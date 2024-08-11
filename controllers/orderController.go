@@ -39,6 +39,7 @@ func GetOrders() gin.HandlerFunc {
 func GetOrder() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+
 		orderId := c.Param("order_id")
 		var order models.Order
 
@@ -53,6 +54,8 @@ func GetOrder() gin.HandlerFunc {
 
 func CreateOrder() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+
 		var table models.Table
 		var order models.Order
 
@@ -99,6 +102,8 @@ func CreateOrder() gin.HandlerFunc {
 
 func UpdateOrder() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+
 		var table models.Table
 		var order models.Order
 
@@ -152,6 +157,8 @@ func UpdateOrder() gin.HandlerFunc {
 }
 
 func OrderItemOrderCreator(order models.Order) string {
+	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+
 	order.Created_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 	order.Updated_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 
