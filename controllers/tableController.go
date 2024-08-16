@@ -105,11 +105,11 @@ func UpdateTable() gin.HandlerFunc {
 		var updateObj primitive.D
 
 		if table.Number_of_guests != nil {
-			updateObj = append(updateObj, bson.E{"number_of_guests", table.Number_of_guests})
+			updateObj = append(updateObj, bson.E{Key: "number_of_guests", Value: table.Number_of_guests})
 		}
 
 		if table.Table_number != nil {
-			updateObj = append(updateObj, bson.E{"table_number", table.Table_number})
+			updateObj = append(updateObj, bson.E{Key: "table_number", Value: table.Table_number})
 		}
 
 		table.Updated_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
@@ -125,7 +125,7 @@ func UpdateTable() gin.HandlerFunc {
 			ctx,
 			filter,
 			bson.D{
-				{"$set", updateObj},
+				{Key: "$set", Value: updateObj},
 			},
 			&opt,
 		)

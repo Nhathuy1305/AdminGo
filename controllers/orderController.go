@@ -116,18 +116,18 @@ func UpdateOrder() gin.HandlerFunc {
 		}
 
 		if order.Table_id != nil {
-			err := menuCollection.FindOne(ctx, bson.M{"table_id": food.Table_id}).Decode(&table)
+			err := menuCollection.FindOne(ctx, bson.M{"table_id": order.Table_id}).Decode(&table)
 			defer cancel()
 			if err != nil {
 				msg := fmt.Sprintf("Menu was not found")
 				c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
 				return
 			}
-			updateObj = append(updateObj, bson.E{"table", order.Table_id})
+			updateObj = append(updateObj, bson.E{Key: "table", Value: order.Table_id})
 		}
 
 		order.Updated_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
-		updateObj = append(updateObj, bson.E{"updated_at", order.Updated_at})
+		updateObj = append(updateObj, bson.E{Key: "updated_at", Value: order.Updated_at})
 
 		upsert := true
 
@@ -140,7 +140,7 @@ func UpdateOrder() gin.HandlerFunc {
 			ctx,
 			filter,
 			bson.D{
-				{"$set", updateObj},
+				{Key: "$set", Value: updateObj},
 			},
 			&opt,
 		)
