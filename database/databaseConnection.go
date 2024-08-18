@@ -6,12 +6,26 @@ import (
 	"log"
 	"time"
 
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func DBinstance() *mongo.Client {
-	MongoDb := "mongodb://localhost:27017"
+	envFile, _ := godotenv.Read(".env")
+
+	mongoUser := envFile["MONGO_INITDB_ROOT_USERNAME"]
+	mongoPass := envFile["MONGO_INITDB_ROOT_PASSWORD"]
+	mongoHost := envFile["MONGO_HOST"]
+	mongoPort := envFile["MONGO_PORT"]
+
+	fmt.Printf("Username: %s, Password: %s, Host: %s, Port: %s\n", mongoUser, mongoPass, mongoHost, mongoPort)
+
+	if mongoUser == "" || mongoPass == "" || mongoHost == "" || mongoPort == "" {
+		log.Fatal("One or more required environment variables are missing")
+	}
+
+	MongoDb := fmt.Sprintf("mongodb://%s:%s@%s:%s", mongoUser, mongoPass, mongoHost, mongoPort)
 	fmt.Print(MongoDb)
 
 	client, err := mongo.NewClient(options.Client().ApplyURI(MongoDb))
