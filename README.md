@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="images/logo.png" alt="Restaurant Management Logo" width="70"/>
+</div>
+
 <h1 align="center">RESTAURANT MANAGEMENT BACKEND</h1>
 
 <div align="center">
