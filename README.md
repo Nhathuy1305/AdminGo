@@ -65,6 +65,13 @@ MONGO_PORT=
 
 ### Run the Application
 
+#### Option 1: Run by Docker Compose
+Run the Docker Compose to start using the application:
+```bash
+docker-compose up -d
+```
+
+#### Option 2: Run separately by Docker and Go command
 Create the Docker Images with these commands:
 ```bash
 docker run -d --name mongo-demo \

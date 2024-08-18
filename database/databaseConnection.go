@@ -19,8 +19,6 @@ func DBinstance() *mongo.Client {
 	mongoHost := envFile["MONGO_HOST"]
 	mongoPort := envFile["MONGO_PORT"]
 
-	fmt.Printf("Username: %s, Password: %s, Host: %s, Port: %s\n", mongoUser, mongoPass, mongoHost, mongoPort)
-
 	if mongoUser == "" || mongoPass == "" || mongoHost == "" || mongoPort == "" {
 		log.Fatal("One or more required environment variables are missing")
 	}
