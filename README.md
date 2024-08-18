@@ -16,6 +16,7 @@ This backend service is designed for a restaurant management system built with G
 - [Usage](#usage)
 - [Database Management](#database-management)
 - [API Endpoints](#api-endpoints)
+- [Contact](#contact)
 - [License](#license)
 
 ## Features
@@ -201,6 +202,11 @@ This project uses the following Go packages:
 - [github.com/go-playground/validator/v10 v10.20.0](https://pkg.go.dev/github.com/go-playground/validator/v10)
 - [go.mongodb.org/mongo-driver v1.16.0](https://pkg.go.dev/go.mongodb.org/mongo-driver)
 - [golang.org/x/crypto v0.23.0](https://pkg.go.dev/golang.org/x/crypto)
+
+## Contact
+
+- LinkedIn: https://www.linkedin.com/in/nhathuy1305
+- Email: dangnhathuy.work@gmail.com
 
 ## License
 
