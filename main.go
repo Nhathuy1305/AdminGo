@@ -5,6 +5,7 @@ import (
 	"golang-restaurant-management/database"
 	middleware "golang-restaurant-management/middleware"
 	routes "golang-restaurant-management/routes"
+	"log"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -35,5 +36,8 @@ func main() {
 	routes.OrderItemRoutes(router)
 	routes.InvoiceRoutes(router)
 
-	router.Run(":" + port)
+	err := router.Run(":" + port)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

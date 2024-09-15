@@ -54,7 +54,7 @@ go mod tidy
 
 ### Environment Variables
 
-Create a `.env` file in the root directory of your project and configure the following environment variables:
+Change `.env-example` to `.env` file in the root directory and configure the following environment variables:
 
 ```env
 PORT=8000 #Optional
